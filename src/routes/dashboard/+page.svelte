@@ -29,6 +29,17 @@
         align-items: center;
         justify-content: space-between;
     }
+    .headerContainer button {
+        background: #003C5B;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
     main {
         display: flex;
         flex-direction: column;
@@ -40,6 +51,8 @@
         display: flex;
         align-items: stretch;
         border: 1px solid cyan;
+        border-radius: 5px;
+        overflow: hidden;
     }
 
     .enterTodo input {
@@ -66,4 +79,5 @@
     .enterTodo button:hover {
         background: transparent;
     }
+
 </style>
