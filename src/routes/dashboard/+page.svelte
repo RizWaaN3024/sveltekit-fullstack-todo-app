@@ -1,14 +1,39 @@
+<script>
+    let todoList = ["do the groceries"]
+    let currTodo = "";
+    let error = false;
+
+    function addTodo() {
+        error = false;
+        if(!currTodo) {
+            error = true;
+        }
+        todoList = [...todoList, currTodo];
+        currTodo = "";
+    }
+</script>
+
 <div class="mainContainer">
     <div class="headerContainer">
         <h1>Todo List</h1>
-        <button>Save</button>
+        <button><i class="fa-regular fa-floppy-disk"></i><p>Save</p></button>
     </div>
     <main>
-
+        {#each todoList as todo, index}
+            <div class="todo">
+                <p>
+                    {index+1}. {todo}
+                </p>
+                <div class="actions">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <i class="fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+        {/each}
     </main>
-    <div class="enterTodo">
-        <input type="text" placeholder="Enter Todo"/>
-        <button>ADD</button>
+    <div class={"enterTodo" + (error ? "errorBorder"  : "")}>
+        <input bind:value={currTodo} type="text" placeholder="Enter Todo"/>
+        <button on:click={addTodo}>ADD</button>
     </div>
 </div>
 
@@ -38,13 +63,41 @@
         font-weight: 700;
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .headerContainer button:hover {
+        opacity: 0.7;
     }
     main {
         display: flex;
         flex-direction: column;
         gap: 8px;
         flex: 1;
+    }
+
+    .todo {
+        border-left: 1px solid cyan;
+        padding: 8px 14px;  
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1.3rem;
+    }
+
+    .actions i:hover {
+        color: coral;
+    }
+
+    .actions i {
+        cursor: pointer;
     }
 
     .enterTodo {
@@ -63,12 +116,16 @@
         flex: 1;
     }
 
+    .errorBorder {
+        border-color: coral !important;
+    }
+
     .enterTodo input:focus {
         outline: none;
     }
 
     .enterTodo button {
-        padding: 0 14px;
+        padding: 0 28px;
         background: #003C5B;
         border: none;
         color: cyan;
